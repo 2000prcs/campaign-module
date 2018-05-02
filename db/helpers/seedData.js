@@ -122,9 +122,9 @@ function createUsers() {
 
 // console.log('Creating Projects');
 // createProjects();
-console.log('Creating Users');
-createUsers();
-console.log('done');
+// console.log('Creating Users');
+// createUsers();
+// console.log('done');
 
 // save levels and users to database
 // saveProjects(projects)
