@@ -1,2 +1,4 @@
 node_modules
 db/helpers/seedDatas
+.DS_Store
+db/.DS_Store
