@@ -1,7 +1,7 @@
 const faker = require('faker');
 const fs = require('fs');
 const uuidv4 = require('uuid/v4');
-
+const moment = require('moment');
 
 //let projectFilePostgres = 'projects' + Math.floor(Math.random() * 1000) + '.txt';
 
@@ -12,7 +12,7 @@ function createProjects() {
 
   for (let i = 1; i <= 10000000; i++) {
     id = i;
-    let aboutInfo = faker.lorem.paragraphs();
+    let aboutInfo = faker.lorem.paragraph();
     let numberOfBackers = Math.floor(Math.random() * 100);
 
     const tempProject = `${id}|${aboutInfo}|${numberOfBackers}`;
@@ -30,20 +30,20 @@ function createProjects() {
 };
 
 
-//let userFilePostgres = 'users' + Math.floor(Math.random() * 1000) + '.txt';
+let levelsFile = 'levels' + Math.floor(Math.random() * 1000) + '.txt';
 
 
 function createLevels() {
   let tempLevels = [];
-  let levelId = 1;
+  let levelId = 0;
   
-  for (let i = 1; i <= 10000000; i++) {
+  for (let i = 14996839; i <= 9000000; i++) {
     let projectId = 1 + Math.floor(Math.random() * 10000000);
     let projectNumberOfBackers = 0;
     let numLevels = 1 + Math.floor(Math.random() * 5);
-
+    
     for (let j = 0; j < numLevels; j++) {
-      let id = levelId;
+      let id = i + levelId;
       levelId++;
       let cutoffAmount = faker.commerce.price();
       let name = faker.company.bsNoun();
@@ -54,8 +54,7 @@ function createLevels() {
       for (let k = 0; k < numIncludes; k++) {
         includesArray.push(faker.lorem.words());
       }
-      let includes = includesArray;
-      let estimatedDelivery = faker.date.future();
+      let estimatedDelivery = moment(faker.date.future()).format('MM/DD/YYYY h:mm:ss a');
       let shipsTo = faker.address.country();
       let numberOfBackers = Math.floor(Math.random() * 100);
       projectNumberOfBackers += numberOfBackers;
@@ -71,13 +70,13 @@ function createLevels() {
           }
         }
       }
-      const tempLevel = `${id}|${cutoffAmount}|${name}|${description}|${includes}|${estimatedDelivery}|
-      ${shipsTo}|${numberOfBackers}|${maxBackers}|${projectId}`;
+      let includes = {'includes': includesArray};
+      const tempLevel = `${id}|${cutoffAmount}|${name}|${description}|${JSON.stringify(includes)}|${estimatedDelivery}|${shipsTo}|${numberOfBackers}|${maxBackers}|${projectId}`;
       tempLevels.push(tempLevel);
     }
 
     if (i % 1000 === 0) {
-      fs.appendFileSync('levels.txt', `${tempLevels.join('\n')}\n`);
+      fs.appendFileSync(levelsFile, `${tempLevels.join('\n')}\n`);
       tempLevels = [];
       process.stdout.write('.');
       if (i % 10000 === 0) {
@@ -94,7 +93,7 @@ function createLevels() {
 
 function createUsers() {
   let users = [];
-  for (let i = 1; i <= 10000000; i++) {
+  for (let i = 1; i <= 5000000; i++) {
     let id = i;
     let username = faker.internet.userName() + i;
 
@@ -104,9 +103,10 @@ function createUsers() {
       let tempProjects = {};
       tempProjects.projectId = 1 + Math.floor(Math.random() * 10000000);
       tempProjects.amount = faker.commerce.price();
-      tempProjectsBacked.push(JSON.stringify(tempProjects));
+      tempProjectsBacked.push(tempProjects);
     }
-    const tempUser = `${id}|${username}|${tempProjectsBacked}`;
+    let tempObj = {'tempProjectsBacked': tempProjectsBacked}
+    const tempUser = `${id}|${username}|${JSON.stringify(tempObj)}`;
     users.push(tempUser);
 
     if (i % 1000 === 0) {
@@ -120,12 +120,12 @@ function createUsers() {
   }
 };
 
-console.log('Creating Projects');
-createProjects();
+// console.log('Creating Projects');
+// createProjects();
 console.log('Creating levels');
 createLevels();
-console.log('Creating Users');
-createUsers();
+// console.log('Creating Users');
+// createUsers();
 console.log('done');
 
 
