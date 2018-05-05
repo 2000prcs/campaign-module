@@ -137,6 +137,8 @@ function createUsers() {
 //   });
 
 
+// fs.writeStream works but it's way slower than fs.appendSync
+
 // function writeTenMillionTimes(writer, data, encoding, callback) {
 //   let i = 100000;
 //   write();

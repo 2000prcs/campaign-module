@@ -37,15 +37,15 @@ function createLevels() {
   let tempLevels = [];
   let levelId = 0;
   
-  for (let i = 14996839; i <= 9000000; i++) {
-    let projectId = 1 + Math.floor(Math.random() * 10000000);
+  for (let i = 1; i <= 1000000; i++) {
+    let projectId = i;
     let projectNumberOfBackers = 0;
     let numLevels = 1 + Math.floor(Math.random() * 5);
     
     for (let j = 0; j < numLevels; j++) {
       let id = i + levelId;
       levelId++;
-      let cutoffAmount = faker.commerce.price();
+      let cutoffAmount = faker.commerce.price(); // integer
       let name = faker.company.bsNoun();
       let description = faker.lorem.sentence();
       // each level includes 1 to 3 things

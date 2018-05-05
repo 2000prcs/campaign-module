@@ -8,6 +8,10 @@ class Support extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+      // limited: backer number is close to the maxbacker number
+      // all levels: all levels including limited
+      // current: excluding limit
+      // full: number of backer reached to the max
 			allCurrentLevels: [],
 			currentLevels: [],
 			limitedLevels: [],
@@ -49,7 +53,7 @@ class Support extends React.Component {
 		let context = this;
 		axios.get(`http://54.209.149.1:80/levels/${this.props.projectId}`)
 		.then(results => {
-			let levels = results.data;
+      let levels = results.data;
 			let updatedAllCurrentLevels = [];
 			let updatedCurrentLevels = [];
 			let updatedLimitedLevels = [];

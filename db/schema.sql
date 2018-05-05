@@ -4,32 +4,42 @@
 -- DROP TABLE project_level;
 -- DROP TABLE project_user;
 
--- CREATE TABLE users (
---   id INT NOT NULL,
---   username text,
---   tempProjectsBacked JSON,
---   PRIMARY KEY (id)
--- );
+--SELECT * FROM pledges WHERE projectid in ... Group by levelid COUNT  -- project - level - total amount of pledges
+--INSERT ... INTO pledges INCREMENT or UPDATE numberofbackers IN levels
+-- potential queries I would need -- 
+-- 1. query for each project (project id)
+-- 2. query for getting all levels with the project (level id + project id)
+-- 3. query for saving user with project / level / amount of pledge (pledge id + project id + level id)
+-- 4. query for incrementing number of backers per project id / per level id (project id + level id)
 
--- CREATE TABLE projects (
---   id INT NOT NULL,
---   aboutInfo text,
---   numberOfBackers INT,
---   PRIMARY KEY (id)
--- );
+
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY,
+  aboutInfo text,
+  numberOfBackers INT
+);
+
+CREATE TABLE pledges (
+  id SERIAL PRIMARY KEY,
+  -- username text, (temporary)
+  userid INT NOT NULL,
+  backedAmount INT, -- amount is not tracked on the website
+  levelId INT CONSTRAINT pledge_level_ref REFERENCES levels (id) ON UPDATE CASCADE ON DELETE CASCADE, 
+  projectId INT CONSTRAINT pledge__project_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 CREATE TABLE levels (
-  id INT NOT NULL,
-  cutoffAmount DECIMAL,
-  name text,
-  description text,
+  id SERIAL PRIMARY KEY,
+  cutoffAmount INT,
+  name TEXT,
+  description TEXT,
   includes JSON,
-  estimatedDelivery date,
-  shipsTo text,
+  estimatedDelivery DATE,
+  shipsTo TEXT,
   numberOfBackers INT,
-  maxBackers INT,
-  projectId INT CONSTRAINT project_level_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE,
-  PRIMARY KEY (id)
+  maxBackers INT, 
+  -- each project must have at least one level 
+  projectId INT CONSTRAINT project_level_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
