@@ -13,10 +13,26 @@
 -- 4. query for incrementing number of backers per project id / per level id (project id + level id)
 
 
-CREATE TABLE projects (
+-- CREATE TABLE projects (
+--   id SERIAL PRIMARY KEY,
+--   aboutInfo text,
+--   numberOfBackers INT
+-- );
+
+
+CREATE TABLE levels (
   id SERIAL PRIMARY KEY,
-  aboutInfo text,
-  numberOfBackers INT
+  projectId INT CONSTRAINT project_level_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  -- projectLevel INT,
+  cutoffAmount INT,
+  name VARCHAR(100),
+  description TEXT,
+  includes JSON,
+  estimatedDelivery TIMESTAMP WITH TIME ZONE,
+  shipsTo VARCHAR(100),
+  numberOfBackers INT,
+  maxBackers INT
+  -- each project must have at least one level 
 );
 
 CREATE TABLE pledges (
@@ -24,22 +40,7 @@ CREATE TABLE pledges (
   -- username text, (temporary)
   userid INT NOT NULL,
   backedAmount INT, -- amount is not tracked on the website
-  levelId INT CONSTRAINT pledge_level_ref REFERENCES levels (id) ON UPDATE CASCADE ON DELETE CASCADE, 
-  projectId INT CONSTRAINT pledge__project_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE
+  projectId INT CONSTRAINT pledge__project_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  levelId INT CONSTRAINT pledge_level_ref REFERENCES levels (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-CREATE TABLE levels (
-  id SERIAL PRIMARY KEY,
-  cutoffAmount INT,
-  name TEXT,
-  description TEXT,
-  includes JSON,
-  estimatedDelivery DATE,
-  shipsTo TEXT,
-  numberOfBackers INT,
-  maxBackers INT, 
-  -- each project must have at least one level 
-  projectId INT CONSTRAINT project_level_ref REFERENCES projects (id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
 
