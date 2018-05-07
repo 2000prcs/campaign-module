@@ -1,25 +1,18 @@
 const faker = require('faker');
 const fs = require('fs');
 
+let projects = [];
 let projectId = 1;
+
+let tempLevels = [];
 let levelId = 1;
+
+let pledges = [];
 let pledgeId = 1;
 
-// generating ramdom unique number betweem 1 and limit
-const randomUniqueGenerator = (limit) => {
-  const arr = [];
-  while (arr.length < 1) {
-    const randomnumber = Math.floor(Math.random() * limit) + 1;
-    if (arr.indexOf(randomnumber) > -1) continue;
-    arr[arr.length] = randomnumber;
-  }
-  return arr[0];
-};
 
 function createProjects() {
-  const projects = [];
-
-  // generate Project 10M
+  // generate 10M projects
   for (let i = 1; i <= 10000000; i++) {
     const id = projectId;
 
@@ -29,18 +22,18 @@ function createProjects() {
     const tempProject = `${id}|${aboutInfo}|${numberOfBackers}`;
     projects.push(tempProject);
 
-    // if (i % 1000 === 0) {
-    // fs.appendFileSync('projects.txt', `${projects.join('\n')}\n`);
-    // projects = [];
-    // process.stdout.write('.');
-    // if (i % 10000 === 0) {
-    //   console.log(i);
-    // }
-    // }
+    if (projectId % 100000 === 0) {
+      fs.appendFileSync('projects.txt', `${projects.join('\n')}\n`);
+      projects = [];
+      if (projectId % 100000 === 0) {
+        console.log('project: ', projectId);
+      }
+    }
 
-    // generate levels of pledges
-    let tempLevels = [];
+    // generate pledge level for each project
     let projectNumberOfBackers = 0;
+
+    // each project has 3 to 8 pledge levels
     const numLevels = 3 + Math.floor(Math.random() * 8);
 
     for (let j = 0; j < numLevels; j++) {
@@ -49,7 +42,7 @@ function createProjects() {
       const cutoffAmount = parseInt(faker.commerce.price());
       const name = faker.company.bsNoun();
       const description = faker.lorem.sentence();
-      // each level includes 1 to 3 things
+      // each level includes 1 to 3 options
       const numIncludes = 1 + Math.floor(Math.random() * 3);
       const includesArray = [];
       for (let k = 0; k < numIncludes; k++) {
@@ -75,34 +68,33 @@ function createProjects() {
       const tempLevel = `${id}|${projectId}|${cutoffAmount}|${name}|${description}|${JSON.stringify(includes)}|${estimatedDelivery}|${shipsTo}|${numberOfBackers}|${maxBackers}`;
       tempLevels.push(tempLevel);
 
-      if (i % 1000 === 0) {
-        fs.appendFileSync('levels.txt', `${tempLevels.join('\n')}\n`);
+
+      if (levelId % 100000 === 0) {
+        fs.appendFileSync('levels11.txt', `${tempLevels.join('\n')}\n`);
         tempLevels = [];
-        process.stdout.write('.');
-        if (i % 10000 === 0) {
-          console.log(i);
+        if (levelId % 100000 === 0) {
+          console.log('level: ', levelId);
         }
       }
 
-      let pledges = [];
+      // generate pledge for each project's pledge level
+      // each level can have 1 to 3 pledges
       const pledgeRandom = 1 + Math.floor(Math.random() * 3);
 
       for (let k = 0; k <= pledgeRandom; k++) {
         const id = pledgeId;
-
         const userId = 1 + Math.floor(Math.random() * 10000000);
         const backedAmount = parseInt(faker.commerce.price());
 
         const pledge = `${id}|${userId}|${backedAmount}|${projectId}|${levelId}`;
         pledges.push(pledge);
 
-        if (i % 1000 === 0) {
-          fs.appendFileSync('pledges.txt', `${pledges.join('\n')}\n`);
+        if (pledgeId % 100000 === 0) {
+          fs.appendFileSync('pledges11.txt', `${pledges.join('\n')}\n`);
           pledges = [];
-          process.stdout.write('.');
-          if (i % 10000 === 0) {
-            console.log(i);
-          }
+        }
+        if (pledgeId % 100000 === 0) {
+          console.log('pledge: ', pledgeId);
         }
         pledgeId++;
       }
@@ -113,10 +105,8 @@ function createProjects() {
 }
 
 
-console.log('Creating Projects');
+console.time('Seeding');
 createProjects();
-// console.log('Creating Pledges');
-// createPledges();
-// console.log('Creating levels');
-// createLevels();
 console.log('done');
+console.timeEnd('Seeding');
+
