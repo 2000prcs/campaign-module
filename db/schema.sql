@@ -7,7 +7,10 @@
 
 -- Test queries
 -- EXPLAIN ANALYZE SELECT * FROM pledges WHERE id=234680337;
--- INSERT INTO pledges (id, userId) VALUES (195700325, 777); 
+-- INSERT INTO pledges (id, userId) VALUES (195700325, 777);
+-- UPDATE projects SET numberOfBackers = numberOfBackers + 1 WHERE id = pledges.projectId;
+-- UPDATE levels SET numberOfBackers = numberOfBackers + 1 WHERE id = pledges.levelId;
+-- SELECT count(*) FROM pledges WHERE projectId = 10000000 AND levelId = 65000108; 
 
 --SELECT * FROM pledges WHERE projectid in ... Group by levelid COUNT  -- project - level - total amount of pledges
 --INSERT ... INTO pledges INCREMENT or UPDATE numberofbackers IN levels
