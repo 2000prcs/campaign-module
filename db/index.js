@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 // mongoose.connect('mongodb://admin:notairbnb@ds159129.mlab.com:59129/campaign-module');
 mongoose.connect('mongodb://localhost/quickstarter');
 
+// query for insertion
+// db.users.insert({username: "mo", projectsBacked: [{projectId: 77, amount: "77.00"}, {projectId: 777, amount: "777.00"}]});
+// query for update 
+// db.users.findOneAndUpdate({username: "mo"}, { $set: {projectsBacked: [{projectId:77, amount: "8888"}]}});
+// query for last item in project
+// db.projects.find().limit(1).sort({$natural: -1}).explain("executionStats");
+
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
