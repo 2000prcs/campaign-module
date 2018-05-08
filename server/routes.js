@@ -43,7 +43,7 @@ router.post('/pledges/:projectId/:levelId', (req, res)=> {
       res.end('');
     })
     .catch((err) => {
-      console.log('Error while fetching project info', err);
+      console.log('Error while saving pledge for level', err);
       res.writeHead(404);
       res.end('');
     });
@@ -54,13 +54,12 @@ router.post('/pledges/:projectId', (req, res)=> {
   db.saveNewPledge(pledge)
     .then((results) => {
       db.updateNumberOfBackersForProjects(pledge);
-      db.updateNumberOfBackersForLevels(pledge);
       res.writeHead(200);
       console.log('results from DB (project)', results);
       res.end('');
     })
     .catch((err) => {
-      console.log('Error while fetching project info', err);
+      console.log('Error while saving pledge for project', err);
       res.writeHead(404);
       res.end('');
     });

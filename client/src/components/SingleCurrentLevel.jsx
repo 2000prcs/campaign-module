@@ -75,7 +75,7 @@ class SingleCurrentLevel extends React.Component {
 
     console.log(newPledgeForLevel);
 
-    axios.post(`/pledges/${this.props.level.projectId}/${this.props.level.id}`, newPledgeForLevel)
+    axios.post(`/pledges/${this.props.level.projectid}/${this.props.level.id}`, newPledgeForLevel)
       .then((response) => {
         // input value empty =>  not working
         document.getElementById('pledge-amount').value = '';

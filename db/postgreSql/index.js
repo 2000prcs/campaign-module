@@ -45,19 +45,19 @@ const getProjectInfo = projectId => new Promise((resolve, reject) => {
 
 // Saving one pledge -> Increment number of backers for the project -> Increment number of backers for the pledge level
 const saveNewPledge = pledge => new Promise((resolve, reject) => {
-  const query = {
-    text: 'INSERT INTO pledges (userId, backedAmount, projectId, levelId) VALUES ($1. $2, $3, $4);',
-    values: [pledge.userId, pledge.amount, pledge.projectId, pledge.levelId],
-  };
-  client.query(query, (err, res) => {
-    if (err) {
-      console.log(err.stack);
-      reject(err);
-    } else {
-      console.log('Saved pledge: ', res.rows[0]);
-      resolve(res.rows[0]);
-    }
-  });
+  console.log('in DB', pledge);
+  const query = 'INSERT INTO pledges (userId, backedAmount, projectId, levelId) VALUES ($1, $2, $3, $4);';
+  const values = [pledge.userId, pledge.amount, pledge.projectId, pledge.levelId];
+
+  client.query(query, values) 
+    .then ((response) => {
+      console.log('Saved pledge');
+      resolve(response);
+    })
+    .catch((error) => {
+      console.error(error.stack);
+      reject(error);
+    });
 });
 
 
@@ -68,8 +68,8 @@ const updateNumberOfBackersForProjects = pledge => new Promise((resolve, reject)
       console.log(err.stack);
       reject(err);
     } else {
-      console.log('Updated project:', res.rows[0]);
-      resolve(res.rows[0]);
+      console.log('Updated Project');
+      resolve(res);
     }
   });
 });
@@ -82,8 +82,8 @@ const updateNumberOfBackersForLevels = pledge => new Promise((resolve, reject) =
       console.log(err.stack);
       reject(err);
     } else {
-      console.log('Updated level: ', res.rows[0]);
-      resolve(res.rows[0]);
+      console.log('Updated level');
+      resolve(res);
     }
   });
 });
