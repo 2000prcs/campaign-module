@@ -33,13 +33,13 @@ function createProjects() {
     // generate pledge level for each project
     let projectNumberOfBackers = 0;
 
-    // each project has 3 to 8 pledge levels
+    // each project has 3 to 10 pledge levels
     const numLevels = 3 + Math.floor(Math.random() * 8);
 
     for (let j = 0; j < numLevels; j++) {
       const id = levelId;
 
-      const cutoffAmount = parseInt(faker.commerce.price());
+      const cutoffAmount = 10 + Math.floor(Math.random() * 1000);
       const name = faker.company.bsNoun();
       const description = faker.lorem.sentence();
       // each level includes 1 to 3 options
@@ -84,7 +84,7 @@ function createProjects() {
       for (let k = 0; k <= pledgeRandom; k++) {
         const id = pledgeId;
         const userId = 1 + Math.floor(Math.random() * 10000000);
-        const backedAmount = parseInt(faker.commerce.price());
+        const backedAmount = 10 + Math.floor(Math.random() * 1000);
 
         const pledge = `${id}|${userId}|${backedAmount}|${projectId}|${levelId}`;
         pledges.push(pledge);
