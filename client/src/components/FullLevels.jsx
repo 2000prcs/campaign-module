@@ -4,11 +4,10 @@ import moment from 'moment';
 import LevelBackersSection from './LevelBackersSection.jsx';
 
 function FullLevels(props) {
-	return (
+  return (
 		<div id="full-levels-container">
 			<div id="all-gone">All gone!</div>
-			{props.fullLevels.map(level => {
-				return (
+			{props.fullLevels.map(level => (
 					<div className="full-level support-item">
 						<div className="full-level-subcontainer">
 							<div className="level-pledge-amount">Pledge ${level.cutoffAmount} or more</div>
@@ -33,10 +32,9 @@ function FullLevels(props) {
 							<LevelBackersSection level={level} levelType="full"/>
 						</div>
 					</div>
-				)
-			})}
+				))}
 		</div>
-	)
+  );
 }
 
 export default FullLevels;
