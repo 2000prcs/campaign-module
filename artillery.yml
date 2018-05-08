@@ -1,12 +1,22 @@
 config:
-  target: 'https://artillery.io'
+  target: "http://localhost:7777"
   phases:
     - duration: 60
-      arrivalRate: 20
-  defaults:
-    headers:
-      x-my-service-auth: '987401838271002188298567'
+      arrivalCount: 20
 scenarios:
-  - flow:
-    - get:
-        url: "/docs"
+  - name: "fetch project and levels"
+    flow:
+    - loop:
+      - get: 
+          url: "/"
+      - get:
+          url: "/?{{ $loopCount }}"
+          count: 5
+      - get:
+          url: "/about/{{ $loopCount }}"
+          count: 5
+      - get: 
+          url: "/levels/{{ $loopCount }}"
+          count: 5
+
+          
