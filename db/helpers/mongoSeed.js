@@ -8,10 +8,7 @@ const uuidv4 = require('uuid/v4');
 //   flags: 'a'
 // });
 
-// seed levels collection
-// just pass in array of objects to saveProjects and it will create new models
-// do this for 100 projects
-
+// generate separate file for 10M projects 
 let projectFile = 'projects' + Math.floor(Math.random() * 1000) + '.json';
 
 function createProjects() {
@@ -72,17 +69,14 @@ function createProjects() {
     }
   }
 }
-// seed user collection
-// create array of users that will be added to user collection
 
-// keep track of usernames already used since that value has to be unique
-// create 1000 users
+// generate user collection for 10M projects
 
 let userFile = 'users' + Math.floor(Math.random() * 1000) + '.json';
 
-
 function createUsers() {
   let users = [];
+  // keep track of usernames already used since that value has to be unique
   const takenUsers = {};
 
   for (let i = 1; i <= 10000000; i++) {
@@ -136,6 +130,8 @@ function createUsers() {
 //     console.log(err);
 //   });
 
+
+// fs.writeStream works but it's way slower than fs.appendSync
 
 // function writeTenMillionTimes(writer, data, encoding, callback) {
 //   let i = 100000;

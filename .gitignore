@@ -1,2 +1,6 @@
 node_modules
-db/helpers/seedDatas
+db/helpers/mongoSeed
+db/helpers/postgresSeed
+.DS_Store
+db/.DS_Store
+db/helpers/.DS_Store
