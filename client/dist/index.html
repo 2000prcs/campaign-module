@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <title>campaign module</title>
+	  <title>QuickStarter Campaign</title>
 	  <link href="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/styles.css" rel="stylesheet">
 	  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 	  <link href="https://d3mlfyygrfdi2i.cloudfront.net/favicon.png?v=2" rel="icon" type="image/png">
@@ -14,7 +14,7 @@
       // url example: 127.0.0.1:7777?1000
 			const project = window.location.href.split('?')[1];
 			ReactDOM.render(
-				React.createElement(Campaign, {projectId: project, username: "Saige99"}),
+				React.createElement(Campaign, {projectId: project, userId: 777}),
 				document.getElementById('Campaign')
 			)
 		</script>

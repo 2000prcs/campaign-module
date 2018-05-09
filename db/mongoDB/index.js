@@ -44,6 +44,7 @@ const userSchema = new Schema({
 const Project = mongoose.model('Project', projectSchema);
 const User = mongoose.model('User', userSchema);
 
+// saveProjects & saveUsers are for data generation
 const saveProjects = (projects) => {
   const promiseArray = [];
   for (let i = 0; i < projects.length; i++) {
@@ -61,44 +62,6 @@ const saveProjects = (projects) => {
   }
   return Promise.all(promiseArray);
 };
-
-const getUser = username => new Promise((resolve, reject) => {
-  const query = {};
-  query.username = username;
-  User.find(query)
-    .exec((err, user) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(JSON.stringify(user[0]));
-      }
-    });
-});
-
-const saveUserNewBackedProjects = user =>
-  // might want to consider adjusting to allow user to upgrade (or downgrade) pledge amount
-  new Promise((resolve, reject) => {
-    const username = user.username;
-    getUser(username)
-      .then((userData) => {
-        userData = JSON.parse(userData);
-        const projectsBacked = userData.projectsBacked;
-        projectsBacked.push({ projectId: user.projectId, amount: user.amount });
-        const query = {};
-        query.username = username;
-        const updatedValue = {};
-        updatedValue.projectsBacked = projectsBacked;
-        User.findOneAndUpdate(query, updatedValue)
-          .exec((err, user) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(1);
-            }
-          });
-      });
-  });
-
 
 const saveUsers = (users) => {
   const promiseArray = [];
@@ -118,6 +81,8 @@ const saveUsers = (users) => {
   return Promise.all(promiseArray);
 };
 
+
+// queries for GET request
 const getLevels = projectId => new Promise((resolve, reject) => {
   projectId = Number(projectId);
   const query = {};
@@ -150,6 +115,47 @@ const getAboutInfo = projectId => new Promise((resolve, reject) => {
       }
     });
 });
+
+const getUser = username => new Promise((resolve, reject) => {
+  const query = {};
+  query.username = username;
+  User.find(query)
+    .exec((err, user) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(JSON.stringify(user[0]));
+      }
+    });
+});
+
+
+// query for POST request
+const saveUserNewBackedProjects = user =>
+  // might want to consider adjusting to allow user to upgrade (or downgrade) pledge amount
+  new Promise((resolve, reject) => {
+    const username = user.username;
+    getUser(username)
+      .then((userData) => {
+        userData = JSON.parse(userData);
+        const projectsBacked = userData.projectsBacked;
+        projectsBacked.push({ projectId: user.projectId, amount: user.amount });
+        const query = {};
+        query.username = username;
+        const updatedValue = {};
+        updatedValue.projectsBacked = projectsBacked;
+        User.findOneAndUpdate(query, updatedValue)
+          .exec((err, user) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(1);
+            }
+          });
+      });
+  });
+
+
 
 module.exports.Project = Project;
 module.exports.User = User;

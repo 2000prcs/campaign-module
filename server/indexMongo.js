@@ -2,15 +2,15 @@ const express = require('express');
 const parser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-// const router = require('./routes.js');
-const getLevels = require('../db/mongoDB/index.js').getLevels;
-const getAboutInfo = require('../db/mongoDB/index.js').getAboutInfo;
-const saveUserNewBackedProjects = require('../db/mongoDB/index.js').saveUserNewBackedProjects;
-const Project = require('../db/mongoDB/index.js').Project;
-const User = require('../db/mongoDB/index.js').User;
+
+const { getLevels } = require('../db/mongoDB/index.js');
+const { getAboutInfo } = require('../db/mongoDB/index.js');
+const { saveUserNewBackedProjects } = require('../db/mongoDB/index.js');
+const { Project } = require('../db/mongoDB/index.js');
+const { User } = require('../db/mongoDB/index.js');
 
 
-let app = express();
+const app = express();
 
 const port = process.env.PORT || 7777;
 
@@ -20,9 +20,8 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(cors());
 
-// Set up our routes
-// app.use('/levels', router);
 
+// GET request handlers
 app.get('/levels/:projectId', (req, res) => {
   getLevels(req.params.projectId)
     .then((results) => {
@@ -49,6 +48,7 @@ app.get('/about/:projectId', (req, res) => {
     });
 });
 
+// POST request handlers
 app.post('/users', (req, res) => {
   const userNewProject = req.body;
   saveUserNewBackedProjects(userNewProject)

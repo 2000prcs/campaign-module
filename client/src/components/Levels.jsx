@@ -6,16 +6,16 @@ import FullLevels from './FullLevels.jsx';
 function Levels(props) {
   if (props.fullLevels.length) {
     return (
-			<div id="all-levels-container">
-				<CurrentLevels fetchLevels={props.fetchLevels} allCurrentLevels={props.allCurrentLevels} currentLevels={props.currentLevels} limitedLevels={props.limitedLevels} />
-				<FullLevels fullLevels={props.fullLevels} />
-			</div>
+      <div id="all-levels-container">
+        <CurrentLevels userId={props.userId} fetchLevels={props.fetchLevels} allCurrentLevels={props.allCurrentLevels} currentLevels={props.currentLevels} limitedLevels={props.limitedLevels} />
+        <FullLevels userId={props.userId} fullLevels={props.fullLevels} />
+      </div>
     );
   }
   return (
-			<div id="all-levels-container">
-				<CurrentLevels fetchLevels={props.fetchLevels} allCurrentLevels={props.allCurrentLevels} currentLevels={props.currentLevels} limitedLevels={props.limitedLevels} />
-			</div>
+    <div id="all-levels-container">
+     <CurrentLevels userId={props.userId} fetchLevels={props.fetchLevels} allCurrentLevels={props.allCurrentLevels} currentLevels={props.currentLevels} limitedLevels={props.limitedLevels} />
+    </div>
   );
 }
 
