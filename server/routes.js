@@ -5,7 +5,6 @@ const db = require('../db/postgreSql/index.js');
 
 const redis = require('redis');
 
-
 const redisClient = redis.createClient();
 
 // GET request handlers

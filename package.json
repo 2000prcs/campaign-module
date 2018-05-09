@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "start": "node server/index.js & redis-server",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js",
+    "server-dev": "nodemon --inspect server/index.js & redis-server",
     "test": "jest --coverage",
     "style": "sass client/src/styles/styles.scss client/dist/styles.css",
     "redis": "redis-server"

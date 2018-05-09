@@ -6,3 +6,4 @@ db/.DS_Store
 db/helpers/.DS_Store
 newrelic.js
 newrelic_agent.log
+dump.rdb
