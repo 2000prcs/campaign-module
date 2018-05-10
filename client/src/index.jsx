@@ -23,6 +23,7 @@ class Campaign extends React.Component {
   }
 }
 
+// can't use window keyword if it's server-side rendering
 // window.React = React;
 // window.ReactDOM = ReactDOM;
 // window.Campaign = Campaign;

@@ -1,3 +1,7 @@
+import React from "react";
+import { renderToString } from "react-dom/server";
+import Campaign from '../client/src/index';
+
 const express = require('express');
 
 const router = express.Router();
@@ -7,14 +11,9 @@ const redis = require('redis');
 
 const redisClient = redis.createClient();
 
-import React from "react";
-import { renderToString } from "react-dom/server";
-import Campaign from '../client/src/index';
-
+// server-side rendering
 router.get('/', (req, res) => {
-  const campaign = renderToString(
-    <Campaign/>
-  )
+  const campaign = renderToString(<Campaign/>);
 
   res.send(`
     <!DOCTYPE html>
@@ -30,14 +29,12 @@ router.get('/', (req, res) => {
         <script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/bundle.js"></script>
       </body>
     </html>
-    `); 
-
+    `);
 });
 
+// sending module to proxy server
 router.get('/campaign', (req, res) => {
-  const campaign = renderToString(
-    <Campaign/>
-  )
+  const campaign = renderToString(<Campaign/>);
   res.send(campaign);
 });
 
@@ -45,7 +42,7 @@ router.get('/campaign', (req, res) => {
 // GET request handlers
 router.get('/about/:projectId', (req, res) => {
   const projectId = req.params.projectId;
-// use the redis client to get room info from redis cache
+  // use the redis client to get room info from redis cache
   redisClient.get(`info-${projectId}`, (error, result) => {
     if (result) {
       // the result exists in cache - return it to our user immediately
