@@ -8,8 +8,10 @@
 	</head>
 	<body>
     <div id="Campaign"></div>
-    <script type="text/javascript" src="./bundle.js"></script>
-		<!-- <script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/bundle.js"></script> -->
+    <!-- <script type="text/javascript" src="./bundle.js"></script> -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+		<script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/bundle.js"></script>
 		<script>
       // url example: 127.0.0.1:7777?1000
 			const project = window.location.href.split('?')[1];

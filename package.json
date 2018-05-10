@@ -29,6 +29,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "faker": "^4.1.0",
+    "isomorphic-style-loader": "^4.0.0",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
     "mongoose": "^5.0.14",
@@ -59,6 +60,7 @@
     "nodemon": "^1.17.3",
     "react-test-renderer": "^16.3.1",
     "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14"
+    "webpack-cli": "^2.0.14",
+    "webpack-node-externals": "^1.7.2"
   }
 }

@@ -7,6 +7,41 @@ const redis = require('redis');
 
 const redisClient = redis.createClient();
 
+import React from "react";
+import { renderToString } from "react-dom/server";
+import Campaign from '../client/src/index';
+
+router.get('/', (req, res) => {
+  const campaign = renderToString(
+    <Campaign/>
+  )
+
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>QuickStarter Campaign</title>
+        <link href="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
+        <link href="https://d3mlfyygrfdi2i.cloudfront.net/favicon.png?v=2" rel="icon" type="image/png">
+      </head>
+      <body>
+        <div id="Campaign">${campaign}</div>
+        <script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/fec-kickstarter-campaign-module/bundle.js"></script>
+      </body>
+    </html>
+    `); 
+
+});
+
+router.get('/campaign', (req, res) => {
+  const campaign = renderToString(
+    <Campaign/>
+  )
+  res.send(campaign);
+});
+
+
 // GET request handlers
 router.get('/about/:projectId', (req, res) => {
   const projectId = req.params.projectId;

@@ -23,9 +23,9 @@ class Campaign extends React.Component {
   }
 }
 
-window.React = React;
-window.ReactDOM = ReactDOM;
-window.Campaign = Campaign;
+// window.React = React;
+// window.ReactDOM = ReactDOM;
+// window.Campaign = Campaign;
 
 // for now use project 3 and user Saige99
 // $(document).ready(function() {
