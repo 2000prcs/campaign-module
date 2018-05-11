@@ -3,15 +3,8 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/dist');
 
-module.exports = [{
-  // entry: `${SRC_DIR}/index.jsx`,
-  entry: `${SRC_DIR}/app.js`,
-  output: {
-    filename: 'bundle.js',
-    path: DIST_DIR,
-  },
+const common = {
   module: {
     rules: [
       {
@@ -32,31 +25,6 @@ module.exports = [{
           loader: 'sass-loader',
         }],
       },
-    ],
-  },
-},
-{
-  entry: './server/index.js',
-  target: 'node',
-  externals: [nodeExternals()],
-  output: {
-    path: __dirname,
-    filename: 'server.js',
-    publicPath: '/',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?/,
-        exclude: /(node_modules\/)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015'],
-        },
-      },
       {
         test: /\.css$/,
         use: [
@@ -76,11 +44,38 @@ module.exports = [{
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: 'false',
     }),
   ],
-},
+};
 
+const client = {
+  entry: `${SRC_DIR}/Client.jsx`,
+  output: {
+    path: `${__dirname}/public`,
+    filename: 'app.js',
+  },
+};
+
+const server = {
+  entry: `${SRC_DIR}/Server.jsx`,
+  target: 'node',
+  externals: [nodeExternals()],
+  output: {
+    path: `${__dirname}/public`,
+    filename: 'app-server.js',
+    libraryTarget: 'commonjs-module',
+  },
+};
+
+
+module.exports = [
+  Object.assign({}, common, client),
+  Object.assign({}, common, server),
 ];
+

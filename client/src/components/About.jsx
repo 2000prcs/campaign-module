@@ -24,12 +24,12 @@ class About extends React.Component {
 
   render() {
     return (
-			<div id="about-master-container">
-				<div id="about-container">
-					<h1 id="about-header" className="section-header">About</h1>
-					<div id="about-info">{this.state.aboutInfo}</div>
-				</div>
-			</div>
+    <div id="about-master-container">
+      <div id="about-container">
+        <h1 id="about-header" className="section-header">About</h1>
+        <div id="about-info">{this.state.aboutInfo}</div>
+      </div>
+    </div>
     );
   }
 }

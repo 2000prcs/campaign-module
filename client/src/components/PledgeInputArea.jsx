@@ -10,7 +10,7 @@ class PledgeInputArea extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // need to refactor to wrk without DOM
+  // need to refactor to work without DOM
   // componentWillMount() {
   //   document.addEventListener('mousedown', this.handleClick, false);
   // }
