@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node server/index.js & redis-server",
+    "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon --inspect server/index.js & redis-server",
     "test": "jest --coverage",
