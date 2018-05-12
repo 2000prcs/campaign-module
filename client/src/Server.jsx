@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import About from './components/About.jsx';
 import Support from './components/Support.jsx';
 
@@ -24,8 +23,4 @@ class Campaign extends React.Component {
 }
 
 // can't use window keyword if it's server-side rendering
-// window.React = React;
-// window.ReactDOM = ReactDOM;
-// window.Campaign = Campaign;
-
 export default Campaign;

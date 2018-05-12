@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
 import LevelBackersSection from './LevelBackersSection.jsx';
 
-function FullLevels(props) {
+const FullLevels = (props) => {
   return (
   <div id="full-levels-container">
     <div id="all-gone">All gone!</div>
     {props.fullLevels.map(level => (
-        <div className="full-level support-item">
+        <div key={level.id} className="full-level support-item">
           <div className="full-level-subcontainer">
             <div className="level-pledge-amount">Pledge ${level.cutoffAmount} or more</div>
             <div className="level-name">{level.name}</div>
@@ -16,7 +15,7 @@ function FullLevels(props) {
             <div className="level-includes-section">
               <div className="level-additional-info-header">INCLUDES:</div>
               <ul className="level-includes-list">
-                {level.includes.includes.map(item => <li className="includes-list-item">{item}</li>)}
+                {level.includes.includes.map(item => <li className="includes-list-item" key={item} >{item}</li>)}
               </ul>
             </div>
             <div className="level-extra-info-section">

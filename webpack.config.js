@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 
@@ -64,8 +63,6 @@ const client = {
 
 const server = {
   entry: `${SRC_DIR}/Server.jsx`,
-  target: 'node',
-  externals: [nodeExternals()],
   output: {
     path: `${__dirname}/public`,
     filename: 'app-server.js',
