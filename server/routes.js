@@ -4,13 +4,13 @@ const router = express.Router();
 const db = require('../db/postgreSql/index.js');
 
 const redis = require('redis');
-
-const redisClient = redis.createClient();
+const redisHost = process.env.REDIS_HOST || 'localhost';
+const redisClient = redis.createClient('6379', redisHost);
 
 // GET request handlers
 router.get('/about/:projectId', (req, res) => {
   const projectId = req.params.projectId;
-// use the redis client to get room info from redis cache
+  // use the redis client to get room info from redis cache
   redisClient.get(`info-${projectId}`, (error, result) => {
     if (result) {
       // the result exists in cache - return it to our user immediately
@@ -22,7 +22,7 @@ router.get('/about/:projectId', (req, res) => {
           // store the key-value pair (id: data) in cache with an expiry of 1 minute (60s)
           redisClient.setex(`info-${projectId}`, 60, JSON.stringify(results));
           res.writeHead(200);
-          res.end(results.aboutinfo);
+          res.end(JSON.stringify(results));
         })
         .catch((err) => {
           console.log('Error while fetching project info', err);

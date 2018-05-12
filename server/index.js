@@ -20,7 +20,9 @@ app.use(responseTime());
 // routes for each API request
 app.use('/', router);
 
-app.use(express.static(`${__dirname}/../client/dist`));
+// Server static files from public forder (can be changed in the future)
+// app.use(express.static(`${__dirname}/../client/dist`));
+app.use(express.static('public'));
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

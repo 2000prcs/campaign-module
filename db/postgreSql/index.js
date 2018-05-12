@@ -2,7 +2,7 @@ const { Client } = require('pg');
 
 const client = new Client({
   user: 'mo',
-  host: '127.0.0.1',
+  host: process.env.DB_HOST || 'localhost',
   database: 'quickstarter',
   password: '',
   port: 5432,
