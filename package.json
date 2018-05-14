@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
+    "react-prod": "webpack -p",
     "server-dev": "nodemon --inspect server/index.js & redis-server",
     "test": "jest --coverage",
     "style": "sass client/src/styles/styles.scss client/dist/styles.css",

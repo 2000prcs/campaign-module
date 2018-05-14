@@ -4,8 +4,8 @@ const router = express.Router();
 const db = require('../db/postgreSql/index.js');
 
 const redis = require('redis');
-const redisHost = process.env.REDIS_HOST || 'localhost';
-const redisClient = redis.createClient('6379', redisHost);
+const redisHost = process.env.REDIS_HOST || 'localhost' || '172.17.0.2';
+const redisClient = redis.createClient('6379', '172.17.0.2');
 
 // GET request handlers
 router.get('/about/:projectId', (req, res) => {

@@ -1,9 +1,16 @@
 node_modules
+
 db/helpers/mongoSeed
 db/helpers/postgresSeed
+db/postgreSql/DBconfig.json
+
 .DS_Store
 db/.DS_Store
 db/helpers/.DS_Store
+
 newrelic.js
 newrelic_agent.log
+
 dump.rdb
+
+config

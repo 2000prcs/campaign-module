@@ -55,6 +55,7 @@ const common = {
 
 const client = {
   entry: `${SRC_DIR}/Client.jsx`,
+  mode: 'development',
   output: {
     path: `${__dirname}/public`,
     filename: 'app.js',
@@ -63,6 +64,7 @@ const client = {
 
 const server = {
   entry: `${SRC_DIR}/Server.jsx`,
+  mode: 'development',
   output: {
     path: `${__dirname}/public`,
     filename: 'app-server.js',
@@ -70,9 +72,18 @@ const server = {
   },
 };
 
+const minified = {
+  entry: `${SRC_DIR}/Client.jsx`,
+  mode: 'production',
+  output: {
+    path: `${__dirname}/public`,
+    filename: 'bundle.min.js',
+  },
+};
 
 module.exports = [
   Object.assign({}, common, client),
   Object.assign({}, common, server),
+  Object.assign({}, common, minified),
 ];
 
