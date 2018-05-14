@@ -20,9 +20,9 @@ const client = new Client({
 
 client.connect((err) => {
   if (err) {
-    console.error('Connection error', err);
+    console.error('DB Connection error', err);
   } else {
-    console.log('Connected!!!');
+    console.log(`DB Connected for ${process.pid}!!!`);
   }
 });
 

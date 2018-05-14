@@ -1,0 +1,16 @@
+config:
+  target: 'http://ec2-34-207-209-6.compute-1.amazonaws.com'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+scenarios:
+  - name: 'deployment test - get info for projects and pledge levels'
+    flow:
+    - loop:
+      - get:
+          url: '/about/{{ $randomNumber(1,500000) }}'
+        count: 2
+      - get: 
+          url: '/levels/{{ $randomNumber(1,500000) }}'
+        count: 2
+          

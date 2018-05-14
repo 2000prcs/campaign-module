@@ -13,16 +13,16 @@ scenarios:
     - loop:
       - get: 
           url: '/'
-      count: 2
+        count: 2
       - get:
           url: '/?{{ $randomNumber(1,1000000) }}'
           # beforeRequest: 'artilleryRandomId'
-      count: 2
+        count: 2
       - get:
           url: '/about/{{ $randomNumber(1,1000000) }}'
-      count: 2
+        count: 2
       - get: 
           url: '/levels/{{ $randomNumber(1,1000000) }}'
-      count: 2
+        count: 2
 
           
