@@ -26,7 +26,7 @@ class Support extends React.Component {
   }
 
   fetchLevels() {
-    const url = (process.env.NODE_ENV === 'production') ? 'http://ec2-34-207-209-6.compute-1.amazonaws.com' : 'http://localhost:7777';
+    const url = (process.env.NODE_ENV === 'production') ? 'http://SDC-Quickstarter-141756345.us-west-1.elb.amazonaws.com' : 'http://localhost:7777';
 
     axios.get(`${url}/levels/${this.props.projectId}`)
       .then((results) => {

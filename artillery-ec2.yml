@@ -1,16 +1,39 @@
 config:
-  target: 'http://ec2-34-207-209-6.compute-1.amazonaws.com'
+  target: 'http://SDC-Quickstarter-141756345.us-west-1.elb.amazonaws.com'
   phases:
-    - duration: 60
+    - duration: 10
       arrivalRate: 5
+    - duration: 20
+      arrivalRate: 10
 scenarios:
-  - name: 'deployment test - get info for projects and pledge levels'
+  - name: 'most popular product'
+    weight: 75
     flow:
     - loop:
       - get:
-          url: '/about/{{ $randomNumber(1,500000) }}'
-        count: 2
-      - get: 
-          url: '/levels/{{ $randomNumber(1,500000) }}'
-        count: 2
+          url: '/levels/7777'
+        count: 50
+      - get:
+          url: '/about/7777'
+        count: 50
+  - name: 'average product'
+    weight: 15
+    flow:
+    - loop:
+      - get:
+          url: '/levels/6666'
+        count: 50
+      - get:
+          url: '/about/6666'
+        count: 50
+  - name: 'unpopular product'
+    weight: 10
+    flow:
+    - loop:
+      - get:
+          url: '/levels/3333'
+        count: 50
+      - get:
+          url: '/about/3333'
+        count: 50
           

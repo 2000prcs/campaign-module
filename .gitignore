@@ -9,7 +9,11 @@ db/.DS_Store
 db/helpers/.DS_Store
 
 newrelic.js
-newrelic_agent.log
+newrelic_agent*
+
+public/app.js
+public/app-server.js
+public/bundle.min.js
 
 dump.rdb
 
