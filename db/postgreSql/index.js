@@ -1,18 +1,28 @@
 const { Client } = require('pg');
 
+// Local database connection
+// const client = new Client({
+//   user: 'mo',
+//   host: process.env.DB_HOST || 'localhost',
+//   database: 'quickstarter',
+//   password: '',
+//   port: 5432,
+// });
+
+// AWS RDS connection
 const client = new Client({
   user: 'mo',
-  host: process.env.DB_HOST || 'localhost',
+  host: process.env.DB_HOST || 'quickstarter-service.cl9y3zcjg1ni.us-west-1.rds.amazonaws.com',
   database: 'quickstarter',
-  password: '',
+  password: 'quickstarter',
   port: 5432,
 });
 
 client.connect((err) => {
   if (err) {
-    console.error('Connection error', err);
+    console.error('DB Connection error', err);
   } else {
-    console.log('Connected!!!');
+    console.log(`DB Connected for ${process.pid}!!!`);
   }
 });
 

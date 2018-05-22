@@ -13,7 +13,7 @@ let pledgeId = 1;
 
 function createProjects() {
   // generate 10M projects
-  for (let i = 1; i <= 10000000; i++) {
+  for (let i = 1; i <= 500000; i++) {
     const id = projectId;
 
     const aboutInfo = faker.lorem.paragraph();
@@ -22,10 +22,10 @@ function createProjects() {
     const tempProject = `${id}|${aboutInfo}|${numberOfBackers}`;
     projects.push(tempProject);
 
-    if (projectId % 100000 === 0) {
+    if (projectId % 1000 === 0) {
       fs.appendFileSync('projects.txt', `${projects.join('\n')}\n`);
       projects = [];
-      if (projectId % 100000 === 0) {
+      if (projectId % 10000 === 0) {
         console.log('project: ', projectId);
       }
     }
@@ -69,10 +69,10 @@ function createProjects() {
       tempLevels.push(tempLevel);
 
 
-      if (levelId % 100000 === 0) {
-        fs.appendFileSync('levels11.txt', `${tempLevels.join('\n')}\n`);
+      if (levelId % 1000 === 0) {
+        fs.appendFileSync('levels.txt', `${tempLevels.join('\n')}\n`);
         tempLevels = [];
-        if (levelId % 100000 === 0) {
+        if (levelId % 10000 === 0) {
           console.log('level: ', levelId);
         }
       }
@@ -89,11 +89,11 @@ function createProjects() {
         const pledge = `${id}|${userId}|${backedAmount}|${projectId}|${levelId}`;
         pledges.push(pledge);
 
-        if (pledgeId % 100000 === 0) {
-          fs.appendFileSync('pledges11.txt', `${pledges.join('\n')}\n`);
+        if (pledgeId % 1000 === 0) {
+          fs.appendFileSync('pledges.txt', `${pledges.join('\n')}\n`);
           pledges = [];
         }
-        if (pledgeId % 100000 === 0) {
+        if (pledgeId % 10000 === 0) {
           console.log('pledge: ', pledgeId);
         }
         pledgeId++;

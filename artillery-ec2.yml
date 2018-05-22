@@ -1,0 +1,39 @@
+config:
+  target: 'http://SDC-Quickstarter-141756345.us-west-1.elb.amazonaws.com'
+  phases:
+    - duration: 10
+      arrivalRate: 5
+    - duration: 20
+      arrivalRate: 10
+scenarios:
+  - name: 'most popular product'
+    weight: 75
+    flow:
+    - loop:
+      - get:
+          url: '/levels/7777'
+        count: 50
+      - get:
+          url: '/about/7777'
+        count: 50
+  - name: 'average product'
+    weight: 15
+    flow:
+    - loop:
+      - get:
+          url: '/levels/6666'
+        count: 50
+      - get:
+          url: '/about/6666'
+        count: 50
+  - name: 'unpopular product'
+    weight: 10
+    flow:
+    - loop:
+      - get:
+          url: '/levels/3333'
+        count: 50
+      - get:
+          url: '/about/3333'
+        count: 50
+          

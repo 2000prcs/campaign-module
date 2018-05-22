@@ -9,7 +9,7 @@ services:
     networks:
       - webnet
     environment:
-      POSTGRES_PASSWORD: ""
+      POSTGRES_PASSWORD: quickstarter
       POSTGRES_USER: mo
       POSTGRES_DB: quickstarter
   web:
