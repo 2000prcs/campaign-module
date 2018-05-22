@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
+    "react-prod": "webpack -p",
     "server-dev": "nodemon --inspect server/index.js & redis-server",
     "test": "jest --coverage",
     "style": "sass client/src/styles/styles.scss client/dist/styles.css",
@@ -26,6 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "cluster": "^0.7.7",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "faker": "^4.1.0",

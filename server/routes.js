@@ -4,16 +4,27 @@ const router = express.Router();
 const db = require('../db/postgreSql/index.js');
 
 const redis = require('redis');
-const redisHost = process.env.REDIS_HOST || 'localhost';
-const redisClient = redis.createClient('6379', redisHost);
+
+// For local
+// const redisHost = process.env.REDIS_HOST || 'localhost';
+// const redisClient = redis.createClient('6379', redisHost);
+
+// For docker & ec2 instance with module
+// const redisClient = redis.createClient('6379', '172.17.0.2');
+
+
+// For ec2 instance with redis
+const redisClient = redis.createClient('6379', 'ec2-54-224-248-200.compute-1.amazonaws.com');
+
 
 // GET request handlers
 router.get('/about/:projectId', (req, res) => {
-  const projectId = req.params.projectId;
+  const { projectId } = req.params;
   // use the redis client to get room info from redis cache
   redisClient.get(`info-${projectId}`, (error, result) => {
     if (result) {
       // the result exists in cache - return it to our user immediately
+      console.log('redis!!!!!');
       res.send(JSON.parse(result));
     } else {
       // if there's no cached room data, get it from db
@@ -34,7 +45,7 @@ router.get('/about/:projectId', (req, res) => {
 });
 
 router.get('/levels/:projectId', (req, res) => {
-  const projectId = req.params.projectId;
+  const { projectId } = req.params;
   redisClient.get(`levels-${projectId}`, (error, result) => {
     if (result) {
       // the result exists in cache - return it to our user immediately

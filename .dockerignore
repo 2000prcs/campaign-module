@@ -1,4 +1,6 @@
 node_modules
 npm-debug.log
+
 db/helpers/mongoSeed
 db/helpers/postgresSeed
+db/postgreSql/DBconfig.json

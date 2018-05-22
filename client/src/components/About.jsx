@@ -12,7 +12,13 @@ class About extends React.Component {
 
   componentDidMount() {
     const context = this;
-    const url = 'http://127.0.0.1:7777';
+
+    const url = (process.env.NODE_ENV === 'production') ? 'http://SDC-Quickstarter-141756345.us-west-1.elb.amazonaws.com' : 'http://localhost:7777';
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Looks like we are in development mode!');
+    }
+    
     axios.get(`${url}/about/${this.props.projectId}`)
       .then((result) => {
         context.setState({ aboutInfo: result.data.aboutinfo });
