@@ -24,7 +24,7 @@ router.get('/about/:projectId', (req, res) => {
   redisClient.get(`info-${projectId}`, (error, result) => {
     if (result) {
       // the result exists in cache - return it to our user immediately
-      console.log('redis!!!!!');
+      console.log('Redis is up and running');
       res.send(JSON.parse(result));
     } else {
       // if there's no cached room data, get it from db
@@ -36,7 +36,6 @@ router.get('/about/:projectId', (req, res) => {
           res.end(JSON.stringify(results));
         })
         .catch((err) => {
-          console.log('Error while fetching project info', err);
           res.writeHead(404);
           res.end('');
         });
@@ -58,7 +57,6 @@ router.get('/levels/:projectId', (req, res) => {
           res.end(JSON.stringify(results));
         })
         .catch((err) => {
-          console.log('Error while fetching levels', err);
           res.writeHead(404);
           res.end('');
         });
@@ -75,11 +73,9 @@ router.post('/pledges/:projectId/:levelId', (req, res) => {
       db.updateNumberOfBackersForProjects(pledge);
       db.updateNumberOfBackersForLevels(pledge);
       res.writeHead(200);
-      console.log('results from DB (level)', results);
       res.end('');
     })
     .catch((err) => {
-      console.log('Error while saving pledge for level', err);
       res.writeHead(404);
       res.end('');
     });
@@ -91,11 +87,9 @@ router.post('/pledges/:projectId', (req, res) => {
     .then((results) => {
       db.updateNumberOfBackersForProjects(pledge);
       res.writeHead(200);
-      console.log('results from DB (project)', results);
       res.end('');
     })
     .catch((err) => {
-      console.log('Error while saving pledge for project', err);
       res.writeHead(404);
       res.end('');
     });
