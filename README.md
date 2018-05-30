@@ -15,13 +15,15 @@
 
 ## Stress Testing Result
 
-> Conducted stress testing with 309M data with 10M primary data for a real scenario
+> Conducted stress testing with 309M data with 10M primary data to create a realistic scenario
 
 > Testing tool: Artillery, New Relic
+
 
 1. [Module Stress Testing Result](https://gist.github.com/2000prcs/cbda8b64c7b37085a3b2a68a4ae19c5f)
 
 New Relic Result
+
 <img src="https://i.imgur.com/Z5JcGVi.png">
  
 2. [Proxy Stress Testing Result](https://gist.github.com/2000prcs/335d2e4665aac3c99445bfd6231c0e8e)
