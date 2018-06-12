@@ -13,6 +13,13 @@
 1. [Installation](#installation)
 2. [Tests](#running-the-tests)
 
+
+## Demo
+👉 Watch it <a href="https://vimeo.com/267902202">here</a>.
+<br>
+
+<img src="https://media.giphy.com/media/9x1gTrNEeF2PQoAs3d/giphy.gif">
+
 ## Stress Testing Result
 
 > Conducted stress testing with 309M data with 10M primary data to create a realistic scenario
