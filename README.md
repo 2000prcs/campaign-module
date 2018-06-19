@@ -15,7 +15,8 @@
 
 
 ## Demo
-👉 Watch it <a href="https://vimeo.com/267902202">here</a>.
+
+### 👉 Watch [Demo Video](https://vimeo.com/267902202)
 <br>
 
 <img src="https://media.giphy.com/media/9x1gTrNEeF2PQoAs3d/giphy.gif">
