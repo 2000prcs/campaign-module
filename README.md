@@ -2,11 +2,6 @@
 
 > This module is for a crowdfunding web application which allows users to make pledges for prototype products. Users can view each product's pledge levels and back a product 
 
-## Related Projects
-
-  - https://github.com/quickstarter/comments-service
-  - https://github.com/quickstarter/community-backend
-  - https://github.com/quickstarter/product-summary
 
 ## Table of Contents
 
@@ -54,20 +49,20 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 From within the root directory:
 
-> Install project dependencies:
+1. Install project dependencies:
 
 ```sh
 npm install
 ```
 
-> Build a client bundle with webpack: 
+2. Build a client bundle with webpack: 
 
 ```sh
 npm run react-dev (for development) 
 npm run react-prod (for production)
 ```
 
-> Start the app:
+3. Start the app:
 
 ```sh
 npm start
